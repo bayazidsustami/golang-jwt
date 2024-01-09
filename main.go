@@ -130,6 +130,6 @@ func authenticateuser(username, password string) (bool, M) {
 
 func HandlerIndex(w http.ResponseWriter, r *http.Request) {
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	message := fmt.Sprintf("hello %s (%s)", userInfo["gsername"], userInfo["group"])
+	message := fmt.Sprintf("hello %s (%s)", userInfo["username"], userInfo["email"])
 	w.Write([]byte(message))
 }

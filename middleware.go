@@ -17,12 +17,12 @@ func MiddlewareJWTAuthorization(next http.Handler) http.Handler {
 		}
 
 		authorizationHeader := r.Header.Get("Authorization")
-		if !strings.Contains(authorizationHeader, "Bearer ") {
+		if !strings.Contains(authorizationHeader, "Bearer") {
 			http.Error(w, "Invalid Token", http.StatusBadRequest)
 			return
 		}
 
-		tokenString := strings.Replace(authorizationHeader, "Bearer", "", -1)
+		tokenString := strings.Replace(authorizationHeader, "Bearer ", "", -1)
 
 		token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
 			if method, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
